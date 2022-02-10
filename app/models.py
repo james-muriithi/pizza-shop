@@ -18,6 +18,8 @@ class User(db.Model,UserMixin):
     name = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+
+    orders = db.relationship("Order", backref="user", lazy="dynamic")
    
     @property
     def password(self):

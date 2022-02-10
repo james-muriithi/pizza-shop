@@ -22,7 +22,9 @@
                         ORDER
                     </a>
                 </div>
-                <div class="row mx-2 mb-3 d-none">
+
+                {% if current_user.is_admin %}
+                <div class="row mx-2 mb-3">
                     <div class="col-6">
                         <button class="btn btn-success">
                             <a class="text-white" href="{{url_for('main.edit',id=pizza.id)}}">Update</a>
@@ -34,6 +36,8 @@
                         </button>
                     </div>
                 </div>
+                {% endif %}
+                
             </div>
         </div>
         {%endfor%}
