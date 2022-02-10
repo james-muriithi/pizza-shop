@@ -1,3 +1,4 @@
+from email.policy import default
 import os
 from decouple import config
 
@@ -12,7 +13,7 @@ class Config:
     
     SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@localhost/{DB}'
 
-    SECRET_KEY = os.environ.get('SECRET_KEY') or ""
+    SECRET_KEY = config('SECRET_KEY', default="")
 
 
 
