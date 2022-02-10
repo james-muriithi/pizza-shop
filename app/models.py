@@ -40,5 +40,6 @@ class Order(db.Model):
     pizza_id = db.Column(db.Integer,db.ForeignKey('pizzas.id'))
     topping = db.Column(db.String(64))
     total = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
 
     created_at = db.Column(db.DateTime, index=True, default=datetime.now)

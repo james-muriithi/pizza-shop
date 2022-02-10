@@ -14,19 +14,27 @@
                         <form action="" class="" id="order-form">
                             <div class="form-group">
                                 <label for="" class="form-label text-sm">Pizza Size</label>
-                                <select name="size" class="form-select">
-                                    <option value="" selected disabled>Select size</option>
+                                <select name="size" class="form-select" id="size" readonly>
+                                    <option value="{{pizza.size}}" data-price="{{pizza.price}}" selected disabled>
+                                        {{pizza.size}} - {{pizza.price}}
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group mt-3">
                                 <label for="" class="form-label text-sm">Pizza Topping</label>
-                                <select name="topping" class="form-select">
-                                    <option value="" selected disabled>Select topping</option>
+                                <select name="topping" class="form-select" id="topping" required>
+                                    <option value="" disabled>Select topping</option>
+                                    {% for topping in toppings %}
+                                    <option value="{{topping.slug}}" data-price="{{topping.price}}">
+                                        {{topping.name}} - {{topping.price}}
+                                    </option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group mt-3">
                                 <label for="" class="form-label text-sm">Quantity</label>
-                                <input type="number" name="quantity" min="1" class="form-control">
+                                <input type="number" id="quantity" value="1" name="quantity" min="1"
+                                    class="form-control" required>
                             </div>
                         </form>
                     </div>
@@ -36,25 +44,26 @@
                 <div class="px-4">
                     <h2 class="fw-bold text-center fs-5 pt-3">Order Summary</h2>
                     <div class="text-center my-3">
-                        <img src="{{url_for('static', filename=pizza.image)}}" alt="{{pizza.name}}" class="img-fluid summary-pizza">
+                        <img src="{{url_for('static', filename=pizza.image)}}" alt="{{pizza.name}}"
+                            class="img-fluid summary-pizza">
                     </div>
                     <div class="details row justify-content-center pt-4">
                         <div class="col-sm-8">
                             <h3 class="fs-6 pb-2">
                                 <span class="fw-bold">Size:</span>
-                                <span class="size ps-5 text-muted small">Small</span>
+                                <span class="size ps-5 text-muted small">{{pizza.size}}</span>
                             </h3>
                             <h3 class="fs-6 pb-2">
                                 <span class="fw-bold">Topping:</span>
-                                <span class="size ps-5 text-muted small">Mushrooms</span>
+                                <span class="topping ps-5 text-muted small"></span>
                             </h3>
                             <h3 class="fs-6 pb-2">
                                 <span class="fw-bold">Quantity:</span>
-                                <span class="size ps-5 text-muted small">2</span>
+                                <span class="quantity ps-5 text-muted small"></span>
                             </h3>
                             <h3 class="fs-6 pt-3">
                                 <span class="fw-bold text-primary fs-5">Total:</span>
-                                <span class="size ps-5 text-muted small">Ksh 2,000</span>
+                                <span class="ps-5 text-muted small">Ksh <span class="total"></span></span>
                             </h3>
                         </div>
                         <div class="mt-5 text-center">
