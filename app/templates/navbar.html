@@ -6,10 +6,10 @@
     </a>
     <div class="d-flex">
       <span class="cart d-flex d-lg-none">
-        <span class="my-auto">
+        <span class="my-auto d-none">
           <img src="{{url_for('static', filename='./images/shopping_cart.png')}}" alt="cart">
           <div class="cart-counter bg-primary rounded-circle d-flex pt-1">
-            2
+            0
           </div>
         </span>
       </span>
@@ -55,7 +55,7 @@
           </div>
         </li>
         {% endif %}
-        <li class="nav-item d-none d-lg-flex cart ps-4" title="cart">
+        <li class="nav-item d-none cart ps-4" title="cart">
           <span>
             <img src="{{url_for('static', filename='./images/shopping_cart.png')}}" alt="cart" />
             <div class="cart-counter bg-primary rounded-circle d-flex pt-1">
