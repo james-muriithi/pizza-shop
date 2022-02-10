@@ -1,3 +1,4 @@
+from email.policy import default
 import os
 from decouple import config
 
@@ -13,7 +14,7 @@ class Config:
     
     SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://kibet:KibetFlask@localhost/pizza'
 
-    # SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@localhost/{DB}'
+    SECRET_KEY = config('SECRET_KEY', default="fLA28%@ksy")
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or "fLA28%@ksy"
     UPLOADED_PHOTOS_DEST = 'app/static/photos'
