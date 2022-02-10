@@ -4,44 +4,39 @@
 
 <div class="container-fluid ">
 
-        <h1 class="text-center mb-4 fw-bold">Our Menu</h1>
+    <h1 class="text-center mb-4 fw-bold">Our Menu</h1>
 
-{%for pizza in all_pizzas%}
-
-    <div class="card pizza_card m-3 ">
-         <img src="{{url_for('static',filename=pizza.image)}}" alt="{{pizza.name}}" class="pizza_image">
-         <h2 class="px-3 mt-4">{{pizza.name}}</h2>
-            <h3 class="px-3">{{pizza.description[:30] }}---</h3>
-            <p class="px-3">Size: {{pizza.size}}</p>
-            <p class="px-3"><strong>Kshs. {{pizza.price}}</strong></p>
-
-<div class="form-group mb-4 mt-4">
-            <div class="row">
-
-                <input type="submit" id="ord_btn" class="btn btn-primary btn-lg" name="addpizza" value="Add Pizza" required>
-
+    <div class="row">
+        {%for pizza in all_pizzas%}
+        <div class="col-md-4 col-sm-6 mb-3">
+            <div class="show_card pt-3">
+                <img class="pizza_image img-fluid" src="{{url_for('static',filename=pizza.image)}}" alt="">
+                <h2 class="px-3 pt-4"><strong>{{pizza.name}}</strong></h2>
+                <p class="px-3">Size: {{pizza.size}}</p>
+                <p class="px-3">
+                    {{pizza.description | truncate(100) }}
+                </p>
+                <p class="px-3 text-dark"><strong>Ksh {{pizza.price}}</strong></p>
+                <div class="mx-3 my-4">
+                    <a href="{{url_for('main.order', pizza_id=pizza.id)}}" class="btn btn-primary w-100 text-white p-2 order_button">
+                        ORDER
+                    </a>
+                </div>
+                <div class="row mx-2 mb-3 d-none">
+                    <div class="col-6">
+                        <button class="btn btn-success">
+                            <a class="text-white" href="{{url_for('main.edit',id=pizza.id)}}">Update</a>
+                        </button>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-danger">
+                            <a class="text-white" href="{{url_for('main.delete',id=pizza.id)}}">Delete</a>
+                        </button>
+                    </div>
+                </div>
             </div>
-          </div>
-<!--        <div class="card-footer">-->
-
-<!--            <div class="row">-->
-<!--                <div class="col-md-4">-->
-<!--                    <button class="btn btn-primary">-->
-<!--                <a class="text-white" href="{{url_for('main.edit',id=pizza.id)}}">Update</a>-->
-<!--            </button>-->
-<!--                </div>-->
-<!--                <div class="col-md-4"></div>-->
-<!--                <div class="col-md-4">-->
-<!--                      <button class="btn btn-danger">-->
-<!--                <a class="text-white" href="{{url_for('main.delete',id=pizza.id)}}">Delete</a>-->
-<!--            </button>-->
-<!--                </div>-->
-<!--            </div>-->
-
-
-<!--        </div>-->
+        </div>
+        {%endfor%}
     </div>
-
-{%endfor%}
 </div>
 {% endblock %}
