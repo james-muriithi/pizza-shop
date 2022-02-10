@@ -16,7 +16,7 @@ def register():
         db.session.commit()
         
         # send email to user
-        mail_message("Welcome to Pitches","email/welcome_user",user.email,user=user)
+        mail_message("Welcome to Pizza Shop","email/welcome_user",user.email,user=user)
 
 
         flash('User Account created successfully!', 'success')
