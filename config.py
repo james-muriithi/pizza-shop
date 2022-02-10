@@ -5,15 +5,17 @@ class Config:
     """
     General configuration parent class
     """
+
     DB_USER = config('DB_USER', default="")
     DB_PASSWORD = config('DB_PASSWORD', default="")
 
     DB = 'pizza'
     
+
     SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@localhost/{DB}'
 
-    SECRET_KEY = os.environ.get('SECRET_KEY') or ""
-
+    SECRET_KEY = os.environ.get('SECRET_KEY') or "fLA28%@ksy"
+    UPLOADED_PHOTOS_DEST = 'app/static/photos'
 
 
 class ProdConfig(Config):
