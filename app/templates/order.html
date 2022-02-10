@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- section order -->
+
+<section class="body py-5 px-1 px-lg-3">
+    <div class="container-lg">
+        <div class="row mt-5 py-5">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="pitch-card p-4 px-md-5 bg-white shadow">
+                    <h2 class="fw-bold text-center fs-6 pt-3">{{pizza.name}}</h2>
+                    <div class="py-5">
+                        <form action="" class="" id="order-form">
+                            <div class="form-group">
+                                <label for="" class="form-label text-sm">Pizza Size</label>
+                                <select name="size" class="form-select">
+                                    <option value="" selected disabled>Select size</option>
+                                </select>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="" class="form-label text-sm">Pizza Topping</label>
+                                <select name="topping" class="form-select">
+                                    <option value="" selected disabled>Select topping</option>
+                                </select>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="" class="form-label text-sm">Quantity</label>
+                                <input type="number" name="quantity" min="1" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="px-4">
+                    <h2 class="fw-bold text-center fs-5 pt-3">Order Summary</h2>
+                    <div class="text-center my-3">
+                        <img src="{{url_for('static', filename=pizza.image)}}" alt="{{pizza.name}}" class="img-fluid summary-pizza">
+                    </div>
+                    <div class="details row justify-content-center pt-4">
+                        <div class="col-sm-8">
+                            <h3 class="fs-6 pb-2">
+                                <span class="fw-bold">Size:</span>
+                                <span class="size ps-5 text-muted small">Small</span>
+                            </h3>
+                            <h3 class="fs-6 pb-2">
+                                <span class="fw-bold">Topping:</span>
+                                <span class="size ps-5 text-muted small">Mushrooms</span>
+                            </h3>
+                            <h3 class="fs-6 pb-2">
+                                <span class="fw-bold">Quantity:</span>
+                                <span class="size ps-5 text-muted small">2</span>
+                            </h3>
+                            <h3 class="fs-6 pt-3">
+                                <span class="fw-bold text-primary fs-5">Total:</span>
+                                <span class="size ps-5 text-muted small">Ksh 2,000</span>
+                            </h3>
+                        </div>
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-primary px-5 text-white" form="order-form">
+                                Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end order -->
+
+{% endblock %}
