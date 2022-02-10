@@ -1,9 +1,10 @@
-from flask import render_template, abort
+from flask import render_template, abort, redirect, url_for
 from . import main
 from app import db
 from app.models import Order, Pizza
-from app.utils import Toppings, get_toppings
+from app.utils import Toppings
 from .forms import OrderForm
+from app.email import mail_message
 
 @main.route('/')
 def index():
@@ -28,7 +29,18 @@ def order(pizza_id):
         db.session.add(order)
         db.session.commit()
 
-        return "saved successfully"
-        
+        #send email to user
+        # mail_message("Order Successsful","email/order-success",current_user.email,user=current_user)
+
+        return redirect(url_for('.order_success', order_id = order.id))
 
     return render_template('order.html', pizza=pizza, toppings=toppings, form=form)    
+
+
+@main.route('/order-success/<order_id>', methods=["GET"])
+def order_success(order_id):
+    order = Order.query.get(order_id)
+    if not order:
+        return abort(404)
+        
+    return render_template('order-success.html', order=order)    
