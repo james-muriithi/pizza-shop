@@ -2,8 +2,59 @@
 
 {% block content %}
 
-<!-- section signup -->
+<!-- body content here -->
+<section class="body py-5 px-1 px-lg-3">
+    <div class="container-fluid mt-5">
+        <div class="section-title">
+            <div class="pitches row mt-5 mx-0 justify-content-center">
+                <div class="col-xl-5 col-lg-6 col-md-8">
+                    <div class="pitch-card p-4 bg-white shadow">
+                        <h2 class="fw-bold text-center fs-5">Signup</h2>
+                        <div class="pt-5">
+                            {% if form.errors|length > 0 %}
+                            <div class="">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="btn-close btn-sm text-xs" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                    {% for field, errors in form.errors.items() %}
+                                    <div class="">{{ form[field].name|title}}: {{ ', '.join(errors) }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            <form action="" class="" method="post">
+                                {{form.csrf_token}}
+                                <div class="form-group">
+                                    <label for="" class="form-label text-sm">Email</label>
+                                    <input type="text" class="form-control" name="email" placeholder="john@doe.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="form-label text-sm">Full Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="john doe" required>
+                                </div>
+                                <div class="form-group pt-2">
+                                    <label for="" class="form-label text-sm">Password</label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
 
-<!-- end signup -->
+                                <div class="text-center pt-5">
+                                    <button class="btn btn-primary px-4 text-white">
+                                        Signup
+                                    </button>
+                                </div>
+                                <div class="pt-4">
+                                    <small class="fw-bold">
+                                        Already have an account? <a href="{{url_for('auth.login')}}" class="">Login</a>
+                                    </small>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end content here -->
 
 {% endblock %}
