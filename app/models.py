@@ -1,7 +1,11 @@
 from werkzeug.security import generate_password_hash,check_password_hash
-from . import db
 from flask_login import UserMixin
+from . import db
+
 from . import login_manager
+
+from . import db
+from datetime import datetime
 
 class User(db.Model,UserMixin):
     #...
@@ -20,6 +24,10 @@ class User(db.Model,UserMixin):
     def password(self):
         raise AttributeError('You cannot read the password attribute')
 
+    @property
+    def is_admin(self):
+        self.role == 1    
+
     @password.setter
     def password(self, password):
         self.pass_secure = generate_password_hash(password)
@@ -31,14 +39,35 @@ class User(db.Model,UserMixin):
     def load_user(user_id):
       return User.query.get(int(user_id))
 
+
 class Role(db.Model):
-    '''
-    Roles table
-    '''
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True)
-    role = db.relationship('User', backref='role', lazy='dynamic')
+    name = db.Column(db.String(255))
 
-    def __repr__(self):
-        return f'Role {self.name}'
+    users = db.relationship('User', backref="role", lazy="dynamic")
+
+
+class Pizza(db.Model):
+    __tablename__ = 'pizzas'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    price = db.Column(db.Integer)
+    size = db.Column(db.String(64))
+    image = db.Column(db.String(255))
+    description = db.Column(db.Text)
+
+    orders = db.relationship('Order', backref="pizza", lazy="dynamic")
+
+class Order(db.Model):
+    __tablename__ = 'orders'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    pizza_id = db.Column(db.Integer,db.ForeignKey('pizzas.id'))
+    topping = db.Column(db.String(64))
+    total = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
+
+    created_at = db.Column(db.DateTime, index=True, default=datetime.now)

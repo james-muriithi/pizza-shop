@@ -1,0 +1,76 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% with messages=get_flashed_messages()%}
+                {%if messages%}
+                    {%for message in messages%}
+            <div class="alert alert-success alert-dismissible" role="alert">
+
+                {{message}}
+ <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+
+
+            </div>
+
+                    {%endfor%}
+                {%endif%}
+            {%endwith%}
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+
+ 
+    <form action="{{url_for('main.edit',id=data.id)}}" method="POST" enctype="multipart/form-data">
+      <h1 class="text-info text-center">Update Pizza</h1>
+
+      <div class="form-group mb-2">
+        <label >Pizza Name</label>
+          <input type="text" name="name"  class="form-control" value='{{data.name}}' placeholder="Pizza name" required>
+      </div>
+
+
+      <div class="form-group mb-2">
+        <label for="">Pizza Price</label>
+          <input type="number" name="price"  class="form-control" value='{{data.price}}' placeholder="Pizza price" required>
+      </div>
+
+
+      <div class="form-group mb-2">
+        <label >Pizza Size</label>
+
+     <select class="form-control" name="size" value='{{data.size}}' id="size">
+         <option value="">Select pizza size</option>
+         <option value="small" {%  if data.size =="small" %}selected {%endif%}>Small</option>
+         <option value="medium" {%  if data.size =="medium" %}selected {%endif%} > Medium</option>
+         <option value="large" {%  if data.size =="large" %}selected {%endif%} >Large</option>
+     </select>
+  </div>
+
+  <div class="form-group mb-2">
+    <label for="">Pizza Description</label><br>
+  <textarea name="description"  class="form-control" >{{data.description}}</textarea>
+  </div>
+
+
+
+
+
+  <div class="form-group mb-2 mt-4">
+   
+        <input type="submit" class="btn btn-primary btn-lg" name="updatepizza" value="Updata Pizza" required>
+
+    </div>
+
+
+  </form>
+
+
+    
+</div>
+{%endblock%}

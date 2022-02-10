@@ -1,6 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- section latest pitches -->
-<!-- end latest pitches -->
+
+<div class="container-fluid ">
+
+    <h1 class="text-center mb-4 fw-bold">Our Menu</h1>
+
+    <div class="row">
+        {%for pizza in all_pizzas%}
+        <div class="col-md-4 col-sm-6 mb-3">
+            <div class="show_card pt-3">
+                <img class="pizza_image img-fluid" src="{{url_for('static',filename=pizza.image)}}" alt="">
+                <h2 class="px-3 pt-4"><strong>{{pizza.name}}</strong></h2>
+                <p class="px-3">Size: {{pizza.size}}</p>
+                <p class="px-3">
+                    {{pizza.description | truncate(100) }}
+                </p>
+                <p class="px-3 text-dark"><strong>Ksh {{pizza.price}}</strong></p>
+                <div class="mx-3 my-4">
+                    <a href="{{url_for('main.order', pizza_id=pizza.id)}}" class="btn btn-primary w-100 text-white p-2 order_button">
+                        ORDER
+                    </a>
+                </div>
+                <div class="row mx-2 mb-3 d-none">
+                    <div class="col-6">
+                        <button class="btn btn-success">
+                            <a class="text-white" href="{{url_for('main.edit',id=pizza.id)}}">Update</a>
+                        </button>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-danger">
+                            <a class="text-white" href="{{url_for('main.delete',id=pizza.id)}}">Delete</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
 {% endblock %}

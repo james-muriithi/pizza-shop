@@ -15,7 +15,7 @@ def register():
         db.session.commit()
         return redirect(url_for('auth.login'))
         title = "New Account"
-    return render_template('auth/signup.html',signup_form = form)
+    return render_template('signup.html',signup_form = form)
 
 @auth.route('/login', methods = ['GET', 'POST'])
 def index():
@@ -26,6 +26,6 @@ def index():
         db.session.commit()
         return redirect(url_for('auth.login'))
         title = "New Account"
-    return render_template('auth/login.html',login_form = form)
+    return render_template('login.html',login_form = form)
 
    
