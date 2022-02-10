@@ -48,12 +48,12 @@
                                         <tr>
                                             <td>
                                                 <div class="py-2"> <span class="d-block text-muted">Order Date</span>
-                                                    <span>{{order.created_at}}</span>
+                                                    <span>{{order.created_at.strftime("%b %d, %Y %H:%m")}}</span>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="py-2"> <span class="d-block text-muted">Order No</span>
-                                                    <span>MT12332345</span>
+                                                    <span>PZS-{{order.id}}</span>
                                                 </div>
                                             </td>
                                             <td>
@@ -115,7 +115,7 @@
                             </div>
                             <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
                             <div class="pt-4 text-end">
-                                <a href="url_for('.index')" class="btn btn-primary text-white">Home</a>
+                                <a href="{{url_for('main.index')}}" class="btn btn-primary text-white">Home</a>
                             </div>
                         </div>
                     </div>
