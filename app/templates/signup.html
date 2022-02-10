@@ -11,18 +11,30 @@
                     <div class="pitch-card p-4 bg-white shadow">
                         <h2 class="fw-bold text-center fs-5">Signup</h2>
                         <div class="pt-5">
+                            {% if form.errors|length > 0 %}
+                            <div class="">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="btn-close btn-sm text-xs" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                    {% for field, errors in form.errors.items() %}
+                                    <div class="">{{ form[field].name|title}}: {{ ', '.join(errors) }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
                             <form action="" class="" method="post">
+                                {{form.csrf_token}}
                                 <div class="form-group">
                                     <label for="" class="form-label text-sm">Email</label>
-                                    <input type="text" class="form-control" placeholder="john@doe.com">
+                                    <input type="text" class="form-control" name="email" placeholder="john@doe.com" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="form-label text-sm">Full Name</label>
-                                    <input type="text" class="form-control" placeholder="john doe">
+                                    <input type="text" class="form-control" name="name" placeholder="john doe" required>
                                 </div>
                                 <div class="form-group pt-2">
                                     <label for="" class="form-label text-sm">Password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" name="password" required>
                                 </div>
 
                                 <div class="text-center pt-5">
