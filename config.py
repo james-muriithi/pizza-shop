@@ -11,8 +11,9 @@ class Config:
 
     DB = 'pizza'
     
+    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://kibet:KibetFlask@localhost/pizza'
 
-    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@localhost/{DB}'
+    # SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@localhost/{DB}'
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or "fLA28%@ksy"
     UPLOADED_PHOTOS_DEST = 'app/static/photos'
