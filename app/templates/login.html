@@ -11,15 +11,26 @@
                     <div class="pitch-card p-4 bg-white shadow">
                         <h2 class="fw-bold text-center fs-5">Login</h2>
                         <div class="pt-5">
+                            {% if form.errors|length > 0 %}
+                            <div class="">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="btn-close btn-sm text-xs" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                    {% for field, errors in form.errors.items() %}
+                                    <div class="">{{ form[field].name|title}}: {{ ', '.join(errors) }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
                             <form action="" class="" method="post">
                                 {{form.csrf_token}}
                                 <div class="form-group">
                                     <label for="" class="form-label text-sm">Email</label>
-                                    <input type="email" class="form-control" required>
+                                    <input type="email" class="form-control" name="email" required>
                                 </div>
                                 <div class="form-group pt-2">
                                     <label for="" class="form-label text-sm">Password</label>
-                                    <input type="password" class="form-control" required>
+                                    <input type="password" class="form-control" name="password" required>
                                 </div>
                                 <div class="form-check mt-3">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
@@ -34,7 +45,8 @@
                                 </div>
                                 <div class="pt-4">
                                     <small class="fw-bold">
-                                        Don’t have an account? <a href="{{url_for('auth.register')}}" class="">Signup</a>
+                                        Don’t have an account? <a href="{{url_for('auth.register')}}"
+                                            class="">Signup</a>
                                     </small>
                                 </div>
                             </form>

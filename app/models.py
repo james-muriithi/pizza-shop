@@ -25,7 +25,11 @@ class User(db.Model,UserMixin):
 
     @property
     def is_admin(self):
-        self.role == 1    
+        return self.role_id == 1  
+
+    @property
+    def first_name(self):
+        return self.name.split()[0]    
 
     @password.setter
     def password(self, password):
@@ -38,6 +42,9 @@ class User(db.Model,UserMixin):
     def load_user(user_id):
       return User.query.get(int(user_id))
 
+    def __repr__(self):
+        return f"User {self.name}"
+
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -45,6 +52,9 @@ class Role(db.Model):
     name = db.Column(db.String(255))
 
     users = db.relationship('User', backref="role", lazy="dynamic")
+
+    def __repr__(self):
+        return f"Role {self.name}"
 
 
 class Pizza(db.Model):
@@ -59,6 +69,9 @@ class Pizza(db.Model):
 
     orders = db.relationship('Order', backref="pizza", lazy="dynamic")
 
+    def __repr__(self):
+        return f"Pizza {self.name}"
+
 class Order(db.Model):
     __tablename__ = 'orders'
 
@@ -70,3 +83,6 @@ class Order(db.Model):
     quantity = db.Column(db.Integer)
 
     created_at = db.Column(db.DateTime, index=True, default=datetime.now)
+
+    def __repr__(self):
+        return f"Order {self.id}"
