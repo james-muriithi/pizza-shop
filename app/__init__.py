@@ -26,7 +26,7 @@ def create_app(config_name):
     # Initializing flask extensions
     bootstrap.init_app(app)
     db.init_app(app)
-
+    login_manager.init_app(app)
 
     # Will add the views and forms
 
