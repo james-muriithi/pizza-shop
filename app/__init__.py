@@ -4,9 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from .main import main as main_blueprint
 from .auth import auth as auth_blueprint
+from flask_login import LoginManager
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
 
 def create_app(config_name):
 
