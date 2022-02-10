@@ -1,3 +1,5 @@
+from flask import url_for
+import os
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import db
@@ -70,6 +72,13 @@ class Pizza(db.Model):
     description = db.Column(db.Text)
 
     orders = db.relationship('Order', backref="pizza", lazy="dynamic")
+
+    @property
+    def pizza_image(self):
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+        if self.image and os.path.isfile(current_dir + url_for('static', filename=self.image)):
+            return url_for('static', filename=self.image)
+        return url_for('static', filename="images/pizza4.jpg")
 
     def __repr__(self):
         return f"Pizza {self.name}"

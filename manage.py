@@ -5,8 +5,6 @@ from flask_migrate import Migrate, MigrateCommand
 from app.models import User, Role, Order, Pizza
 from decouple import config
 
-import os
-
 app = create_app(config('ENV', default="development"))
 migrate = Migrate(app,db)
 manager = Manager(app)

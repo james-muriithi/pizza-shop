@@ -10,7 +10,7 @@
         {%for pizza in all_pizzas%}
         <div class="col-md-4 col-sm-6 mb-3">
             <div class="show_card pt-3">
-                <img class="pizza_image img-fluid" src="{{url_for('static',filename=pizza.image)}}" alt="">
+                <img class="pizza_image img-fluid" src="{{pizza.pizza_image}}" alt="">
                 <h2 class="px-3 pt-4"><strong>{{pizza.name}}</strong></h2>
                 <p class="px-3">Size: {{pizza.size}}</p>
                 <p class="px-3">
